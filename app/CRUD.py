@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Session
-from models import Property
-from schemas import PropertyCreate
+from .database import SessionLocal
+from .models import Property
+from .schemas import PropertyCreate
 
 # Create a property
 def create_property(db: Session, property: PropertyCreate):
