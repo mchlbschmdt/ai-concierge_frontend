@@ -1,3 +1,4 @@
+mysql-connector-python  # or pymysql depending on your DB
 fastapi==0.95.0
 uvicorn==0.23.0
 sqlalchemy==2.0.0
