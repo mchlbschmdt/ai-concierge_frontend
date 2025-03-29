@@ -1,3 +1,5 @@
+from fastapi import FastAPI
+from app import crud, models, schemas, database 
 from app.database import get_db
 from app.schemas import PropertyCreate
 from fastapi import FastAPI, Depends, HTTPException
@@ -5,6 +7,10 @@ from sqlalchemy.orm import Session
 from app.database import get_db
 from app.crud import create_property, get_properties, get_property
 from app.schemas import PropertyCreate
+
+@app.get("/")
+def read_root():
+    return {"message": "Hello, World!"}
 
 # Initialize FastAPI app
 app = FastAPI()
