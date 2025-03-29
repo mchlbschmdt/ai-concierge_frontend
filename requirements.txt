@@ -1,8 +1,8 @@
-mysql-connector-python  # or pymysql depending on your DB
-fastapi
-uvicorn
-sqlalchemy
-pydantic
+mysql-connector-python  # Or your chosen DB driver
+fastapi==0.95.0
+uvicorn==0.18.3
+sqlalchemy==2.0.0
+pydantic==2.0.0  # This is required for newer versions of FastAPI
 psycopg2-binary
 twilio
 openai
