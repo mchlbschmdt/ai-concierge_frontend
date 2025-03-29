@@ -1,7 +1,7 @@
 mysql-connector-python  # or pymysql depending on your DB
-fastapi==0.95.0
-uvicorn==0.23.0
-sqlalchemy==2.0.0
-psycopg2-binary==2.9.3
-twilio==7.12.0
-openai==0.27.0
+fastapi
+uvicorn
+sqlalchemy
+psycopg2-binary
+twilio
+openai
