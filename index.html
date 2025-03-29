@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Property Management</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+    }
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Property Management</h1>
+
+  <!-- Form to Create Property -->
+  <h3>Create Property</h3>
+  <input type="text" id="propertyName" placeholder="Property Name" required>
+  <input type="text" id="propertyLocation" placeholder="Property Location" required>
+  <input type="number" id="propertyPrice" placeholder="Property Price" required>
+  <button id="createPropertyButton">Create Property</button>
+
+  <h3>All Properties</h3>
+  <button id="getPropertiesButton">Fetch Properties</button>
+  <div id="propertiesList"></div>
+
+  <h3>Send SMS</h3>
+  <input type="text" id="smsTo" placeholder="Phone Number" required>
+  <input type="text" id="smsMessage" placeholder="Message" required>
+  <button id="sendSmsButton">Send SMS</button>
+
+  <h3>OpenAI Query</h3>
+  <input type="text" id="openaiPrompt" placeholder="Ask something..." required>
+  <button id="sendOpenAIButton">Ask OpenAI</button>
+  <div id="openaiResponse"></div>
+</div>
+
+<script>
+  const API_URL = 'https://ai-concierge.up.railway.app';  // Replace with your backend URL
+
+  // Create Property Function
+  document.getElementById('createPropertyButton').addEventListener('click', async function () {
+    const name = document.getElementById('propertyName').value;
+    const location = document.getElementById('propertyLocation').value;
+    const price = document.getElementById('propertyPrice').value;
+
+    const response = await fetch(`${API_URL}/properties`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: name,
+        location: location,
+        price: price
+      })
+    });
+
+    const data = await response.json();
+    alert('Property Created: ' + JSON.stringify(data));
+  });
+
+  // Fetch Properties Function
+  document.getElementById('getPropertiesButton').addEventListener('click', async function () {
+    const response = await fetch(`${API_URL}/properties`);
+    const data = await response.json();
+    const propertiesList = document.getElementById('propertiesList');
+    propertiesList.innerHTML = '';
+    data.forEach(property => {
+      propertiesList.innerHTML += `<p>${property.name} - ${property.location} - $${property.price}</p>`;
+    });
+  });
+
+  // Send SMS Function
+  document.getElementById('sendSmsButton').addEventListener('click', async function () {
+    const to = document.getElementById('smsTo').value;
+    const message = document.getElementById('smsMessage').value;
+
+    const response = await fetch(`${API_URL}/send_sms`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        to: to,
+        message: message
+      })
+    });
+
+    const data = await response.json();
+    alert('SMS Sent: ' + data.message_sid);
+  });
+
+  // Ask OpenAI Function
+  document.getElementById('sendOpenAIButton').addEventListener('click', async function () {
+    const prompt = document.getElementById('openaiPrompt').value;
+
+    const response = await fetch(`${API_URL}/openai`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        prompt: prompt
+      })
+    });
+
+    const data = await response.json();
+    document.getElementById('openaiResponse').innerHTML = 'OpenAI Response: ' + data.response;
+  });
+</script>
+
+</body>
+</html>
+
