@@ -2,6 +2,7 @@ mysql-connector-python  # or pymysql depending on your DB
 fastapi
 uvicorn
 sqlalchemy
+pydantic
 psycopg2-binary
 twilio
 openai
