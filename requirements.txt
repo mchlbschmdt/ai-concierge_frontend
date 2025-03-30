@@ -1,7 +1,8 @@
 fastapi==0.99.1
 uvicorn==0.18.3
-pydantic==1.10.13  # Or the latest stable version of V2, if you need V2
-sqlalchemy==2.0.0
+pydantic==1.10.13
+sqlalchemy==1.4.46  # Downgrade for better FastAPI compatibility
 mysql-connector-python
 twilio
 openai
+
