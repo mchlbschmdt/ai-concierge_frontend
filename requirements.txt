@@ -1,6 +1,6 @@
-fastapi==0.95.0
+fastapi==0.99.1
 uvicorn==0.18.3
-pydantic==1.9.1  # Or the latest stable version of V2, if you need V2
+pydantic==1.10.13  # Or the latest stable version of V2, if you need V2
 sqlalchemy==2.0.0
 mysql-connector-python
 twilio
