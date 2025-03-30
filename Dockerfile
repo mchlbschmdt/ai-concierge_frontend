@@ -5,7 +5,7 @@ FROM python:3.12-slim
 WORKDIR /app
 
 # Step 3: Copy the requirements.txt file into the container at /app
-COPY requirements.txt 
+COPY requirements.txt /app
 
 # Step 4: Install dependencies
 RUN pip install --upgrade pip && pip install -r requirements.txt
